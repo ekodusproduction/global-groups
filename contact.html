@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     
@@ -49,20 +49,12 @@
 							<a href="properties.html">Residential</a>
 							<div class="properties-sub-dropdown">
 								<h4>Under Construction</h4>
-								<ul>
-									<li><a href="properties-single.html">Global Ashiyana</a></li>
-									<li><a href="properties-single.html">Global Imperia</a></li>
-									<li><a href="properties-single.html">Global Lakeview</a></li>
-									<li><a href="properties-single.html">Global Sanskriti</a></li>
-									<li><a href="properties-single.html">Global Signature</a></li>
+								<ul id="resUnderConstruction">
+									
 								</ul>
 								<h4>Completed</h4>
-								<ul>
-									<li><a href="properties-single.html">Swastik Elite</a></li>
-									<li><a href="properties-single.html">Swastik Enclave</a></li>
-									<li><a href="properties-single.html">Swastik Green</a></li>
-									<li><a href="properties-single.html">Swastik Pearl</a></li>
-									<li><a href="properties-single.html">Swastik Residency</a></li>
+								<ul id="rescompleted">
+									
 								</ul>
 
 							</div>
@@ -71,8 +63,8 @@
 							<a href="commercial.html">Commercial</a>
 							<div class="properties-sub-dropdown">
 								<h4>Under Construction</h4>
-								<ul>
-									<li><a href="#">Global Tower</a></li>
+								<ul id="ongoingCommercial">
+								
 									
 								</ul>
 								
@@ -104,6 +96,7 @@
       </section>
 
     <section class="ftco-section contact-section">
+    
       <div class="container">
         <div class="row d-flex mb-5 contact-info justify-content-center">
         	<div class="col-md-8">
@@ -130,19 +123,27 @@
           </div>
         </div>
         <div class="row block-9 justify-content-center align-items-center mb-5">
+          
           <div class="col-md-6 align-items-stretch d-flex">
-            <form action="#" class="bg-light p-5 contact-form">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+           
+            <form id="contactForm" class="bg-light p-5 contact-form">
+              <div class="alert  alert-dismissible fade " role="alert">
+               <div id="message_content"></div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <input type="text" class="form-control" name="name" placeholder="Your Name">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
+                <input type="text" class="form-control" name="email" placeholder="Your Email">
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                <input type="number" name="phoneNumber"  class="form-control"  placeholder="Phone number">
+              </div>
+              <div class="form-group">
+                <textarea  id="" cols="30" rows="7" name="message" class="form-control" placeholder="Message"></textarea>
               </div>
               <div class="form-group">
                 <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
@@ -245,6 +246,150 @@
   </script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script>
+
+    			// Make an AJAX request to fetch data
+	$.ajax({
+		url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+		method: "GET",
+		dataType: "json",
+    headers: {
+    'apptoken': 'eyJhbGciOiJIUzM4NCJ9.eyJJc3N1ZXIiOiJQU1NTIiwiQXBwbGljYXRpb24iOiJJUEwtTUFSS0VULVBMQUNFIiwiaWF0IjoxNjQ4NTU2MzY0fQ.sglGgNFW6XwLJ71Bz8MpDcxgX62p2eYjGJ_0vonaoQK06_SDWy92fsonk5tG2XAz',
+    'Content-Type': 'application/json'
+  },
+		success: function(response) {
+		  console.log("reponse",  response.data?.result)
+		const ongoingResedential = response?.data?.result?.filter((ele)=>{
+				if(ele?.status == "ongoing")
+				return ele; 
+		}) 
+		const completedResedential = response?.data?.result?.filter((ele)=>{
+				if(ele?.status == "completed")
+				return ele
+		}) 
+		ongoingResedential && ongoingResedential?.map((ele)=>{
+			$('#resUnderConstruction').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>`)
+		})
+
+		completedResedential && completedResedential?.map((ele)=>{
+			$('#rescompleted').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>`)
+		})
+
+		const ongoingCommercial = response?.data?.result?.filter((ele)=>{
+  if(ele?.status == "completed" && ele?.type == "commercial")
+  return ele
+}) 
+console.log("ongoingCommercial", ongoingCommercial)
+		ongoingCommercial && ongoingCommercial?.map((ele)=>{
+			$('#ongoingCommercial').append(`
+			<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>
+			`)
+		})
+
+									
+
+		
+		console.log("Dinesh", ongoingResedential, completedResedential)
+		},
+		error: function(xhr, status, error) {
+			console.error("Error:", error);
+		}
+	});
+    const form = document.getElementById("contactForm");
+    const responseDiv = document.getElementById("response");
+   
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        const formData = new FormData(form);
+        console.log("message", formData.get("message"))
+        const data = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phoneNumber: formData.get("phoneNumber"),
+          message: formData.get("message"),
+         
+        }
+        console.log("data", data)
+        $.ajax({
+          url: "http://165.22.210.84/node/v1/api/contact/addContact", 
+          method: "POST",
+          data: data,
+       
+          success: function(response) {
+        if(response?.status === 200){
+          form.reset();
+              Toastify({
+        text: response?.data?.message,
+        gravity: "bottom",
+        position: "right",
+        style: {
+          background: "#008000",
+          },
+        duration: 5000
+
+        }).showToast();
+            }else{
+          
+
+              Toastify({
+text: response?.data?.message,
+
+gravity: "bottom",
+position: "right",
+style: {
+    background: "#FF0000",
+  },
+duration: 5000
+
+}).showToast();
+            }
+            console.log("reponse",  response)
+           
+          },
+          error: function(error, message
+          ) {
+            Toastify({
+text: response?.data?.message,
+
+gravity: "bottom",
+position: "right",
+style: {
+    background: "#FF0000",
+  },
+duration: 5000
+
+}).showToast();
+          }
+      });
+
+    });
+      $(document).ready(function() {
+      // Make an AJAX request to fetch data
+      $.ajax({
+          url: "http://165.22.210.84/node/v1/api/project/getAllProjectDropDownList", // Replace with your server-side script
+          method: "GET",
+          dataType: "json",
+          headers: {
+    'apptoken': 'eyJhbGciOiJIUzM4NCJ9.eyJJc3N1ZXIiOiJQU1NTIiwiQXBwbGljYXRpb24iOiJJUEwtTUFSS0VULVBMQUNFIiwiaWF0IjoxNjQ4NTU2MzY0fQ.sglGgNFW6XwLJ71Bz8MpDcxgX62p2eYjGJ_0vonaoQK06_SDWy92fsonk5tG2XAz',
+    'Content-Type': 'application/json'
+  },
+          success: function(response) {
+            console.log("reponse",  response.data?.result)
+              const dropdown = $("#dropdown");
+              dropdown.find("option:not(:first-child)").remove();
+  
+              // Populate the dropdown with received data
+              response.data?.result?.forEach(function(item) {
+                  dropdown.append(new Option(item.projectName, item.projectId));
+              });
+          },
+          error: function(xhr, status, error) {
+              console.error("Error:", error);
+          }
+      });
+  });
+  
+    </script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.easing.1.3.js"></script>
@@ -260,6 +405,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     
   </body>
 </html>

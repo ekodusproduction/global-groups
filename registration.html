@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-    
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
         
@@ -51,30 +51,22 @@
             <a href="properties.html">Residential</a>
             <div class="properties-sub-dropdown">
               <h4>Under Construction</h4>
-              <ul>
-                <li><a href="properties-single.html">Global Ashiyana</a></li>
-                <li><a href="properties-single.html">Global Imperia</a></li>
-                <li><a href="properties-single.html">Global Lakeview</a></li>
-                <li><a href="properties-single.html">Global Sanskriti</a></li>
-                <li><a href="properties-single.html">Global Signature</a></li>
+              <ul id="resUnderConstruction">
+                
               </ul>
               <h4>Completed</h4>
-              <ul>
-                <li><a href="properties-single.html">Swastik Elite</a></li>
-                <li><a href="properties-single.html">Swastik Enclave</a></li>
-                <li><a href="properties-single.html">Swastik Green</a></li>
-                <li><a href="properties-single.html">Swastik Pearl</a></li>
-                <li><a href="properties-single.html">Swastik Residency</a></li>
+              <ul id="rescompleted">
+                
               </ul>
 
             </div>
           </li>
-          <li class="properties-dropdown-item">
-            <a href="commercial.html">Commercial</a>
+          <li class="properties-dropdown-item ">
+              <a href="properties.html">Commercial</a>
             <div class="properties-sub-dropdown">
               <h4>Under Construction</h4>
-              <ul>
-                <li><a href="#">Global Tower</a></li>
+              <ul id="ongoingCommercial">
+              
                 
               </ul>
               
@@ -110,24 +102,24 @@
     
       <img src="./images/globalgroups/registerimg.jpg" alt="">
       <div class="registration_form">
-        <form action="">
+        <form id="myForm">
           <h3>Registration</h3>
           <div>
-            <input type="text" placeholder="Name">
-            <input type="text" placeholder="Phone Number">
+            <input type="text" id="name" name="name" placeholder="Name">
+            <input type="text" id="phonenumber" name="phoneNumber" placeholder="Phone Number">
           </div>
           <div>
-            <input type="email" placeholder="Email">
-            <select name="" id="">
-              <option value="">Vendor Registration</option>
-              <option value="">Land Proposal</option>
+            <input type="email" id="email" name="emailId" placeholder="Email">
+            <select name="projectName" id="dropdown">
+              <option value="">Select an option</option>
+
             </select>
           </div>
           <div>
             
-            <textarea name="" id="" cols="10" rows="5" placeholder="Message"></textarea>
+            <textarea name="message" id="message"  cols="10" rows="5" placeholder="Message"></textarea>
           </div>
-          <button type="submit" class=" reg_submit_btn">Submit</button>
+          <button type="submit" class=" reg_submit_btn" id="submit-button">Submit</button>
         </form>
       </div>
     </main>
@@ -200,8 +192,9 @@
         </div>
       </div>
     </footer>
-
+  
       <script>
+
         let dropdownbtn = document.querySelector('.registration_dropdown')
         let reg_dropdown = document.querySelector('.reg_dropdown')
         dropdownbtn.addEventListener('click', (e) => {
@@ -214,6 +207,151 @@
       </script>
       <script src="js/jquery.min.js"></script>
       <script src="js/jquery-migrate-3.0.1.min.js"></script>
+      <script>
+
+        			// Make an AJAX request to fetch data
+              $.ajax({
+url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+method: "GET",
+dataType: "json",
+headers: {
+    'apptoken': 'eyJhbGciOiJIUzM4NCJ9.eyJJc3N1ZXIiOiJQU1NTIiwiQXBwbGljYXRpb24iOiJJUEwtTUFSS0VULVBMQUNFIiwiaWF0IjoxNjQ4NTU2MzY0fQ.sglGgNFW6XwLJ71Bz8MpDcxgX62p2eYjGJ_0vonaoQK06_SDWy92fsonk5tG2XAz',
+    'Content-Type': 'application/json'
+  },
+success: function(response) {
+console.log("reponse",  response.data?.result)
+const ongoingResedential = response?.data?.result?.filter((ele)=>{
+	if(ele?.status == "ongoing"  && ele?.type == "residential")
+	return ele; 
+}) 
+const completedResedential = response?.data?.result?.filter((ele)=>{
+	if(ele?.status == "completed"  && ele?.type == "residential")
+	return ele
+}) 
+ongoingResedential && ongoingResedential?.map((ele)=>{
+$('#resUnderConstruction').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>`)
+})
+
+completedResedential && completedResedential?.map((ele)=>{
+$('#rescompleted').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>`)
+})
+const ongoingCommercial = response?.data?.result?.filter((ele)=>{
+if(ele?.status == "completed" && ele?.type == "commercial")
+return ele
+}) 
+ongoingCommercial && ongoingCommercial?.map((ele)=>{
+$('#ongoingCommercial').append(`
+<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>
+`)
+})
+},
+error: function(xhr, status, error) {
+console.error("Error:", error);
+}
+});
+      const form = document.getElementById("myForm");
+      const responseDiv = document.getElementById("response");
+     
+      form.addEventListener("submit", function(event) {
+        console.log("form", form)
+          event.preventDefault(); // Prevent the default form submission
+          // Serialize the form data
+          const formData = new FormData(form);
+          console.log("Name: " + formData.get("name"));
+            console.log("Email: " + formData.get("email"));
+            console.log("Message: " + formData.get("message"));
+          console.log("formData", formData)
+
+
+          const data = {
+            name: formData.get("name"),
+            emailId: formData.get("emailId"),
+            message: formData.get("message"),
+            phoneNumber: formData.get("phoneNumber"),
+            projectName: formData.get('projectName')
+          }
+          console.log("data", data)
+          $.ajax({
+            url: "http://165.22.210.84/node/v1/api/registration/addRegistration", // Replace with your server-side script
+            method: "POST",
+            data: data,
+    
+           
+            success: function(response) {
+              console.log("reponse",  response)
+if(response?.status === 200){
+
+  form.reset()
+  Toastify({
+text: response?.data?.message,
+
+gravity: "bottom",
+position: "right",
+style: {
+    background: "#008000",
+  },
+duration: 5000
+
+}).showToast();
+}else{
+  Toastify({
+text: response?.data?.message,
+
+gravity: "bottom",
+position: "right",
+style: {
+    background: "#FF0000",
+  },
+duration: 5000
+
+}).showToast();
+}
+
+             
+            },
+            error: function(xhr, status, error) {
+              Toastify({
+text: response?.data?.message,
+
+gravity: "bottom",
+position: "right",
+style: {
+    background: "#FF0000",
+  },
+duration: 5000
+
+}).showToast();
+            }
+        });
+  
+      });
+        $(document).ready(function() {
+        // Make an AJAX request to fetch data
+        $.ajax({
+            url: "http://165.22.210.84/node/v1/api/project/getAllProjectDropDownList", // Replace with your server-side script
+            method: "GET",
+            dataType: "json",
+            headers: {
+    'apptoken': 'eyJhbGciOiJIUzM4NCJ9.eyJJc3N1ZXIiOiJQU1NTIiwiQXBwbGljYXRpb24iOiJJUEwtTUFSS0VULVBMQUNFIiwiaWF0IjoxNjQ4NTU2MzY0fQ.sglGgNFW6XwLJ71Bz8MpDcxgX62p2eYjGJ_0vonaoQK06_SDWy92fsonk5tG2XAz',
+    'Content-Type': 'application/json'
+  },
+            success: function(response) {
+              console.log("reponse",  response.data?.result)
+                const dropdown = $("#dropdown");
+                dropdown.find("option:not(:first-child)").remove();
+    
+                // Populate the dropdown with received data
+                response.data?.result?.forEach(function(item) {
+                    dropdown.append(new Option(item.projectName, item.projectId));
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+    
+      </script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/jquery.easing.1.3.js"></script>
@@ -229,6 +367,7 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
       <script src="js/google-map.js"></script>
       <script src="js/main.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     
 </body>
 </html>
