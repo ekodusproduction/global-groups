@@ -491,7 +491,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
 			  console.log("Item", item)
 			  $('#project-container').append(`
   <div class='carousel-slider-single-item'>
-		<img class='img-fluid' src="http://127.0.0.1:3000/uploads/${item.projectimage}" class='img-fluid'  alt='projectImage'>
+		<img class='img-fluid' src="http://165.22.210.84/node/uploads/${item.projectimage}" class='img-fluid'  alt='projectImage'>
 		<div class='carousel-slider-text'>
 			<h3>${item?.projectName}</h3>
 		</div>
@@ -577,7 +577,7 @@ if(response?.data?.result?.length > 0){
 	response.data?.result?.map((ele)=>{
 $('#testimonialContainer').append(`<li class="splide__slide me-3 d-flex justify-content-center">
 	<div class="testimonial-card">
-    <img src="http://127.0.0.1:3000/uploads/${ele?.image != null ? ele?.image :"avatar.jpg" }" alt="Testimonial Author" class="testimonial-image">
+    <img src="http://165.22.210.84/node/uploads/${ele?.image != null ? ele?.image :"avatar.jpg" }" alt="Testimonial Author" class="testimonial-image">
     <p class="testimonial-text">${ele?.review}</p>
     <p class="testimonial-author">${ele?.name}</p>
   </div>
@@ -619,7 +619,7 @@ response.data?.map((ele)=>{
 $('#blogContainer').append(` <div class="col-md-3 d-flex">
   <div class="blog-entry justify-content-end">
   <div class="text">
-	  <a href="blog-single.html?id=${ele?.id}" class="block-20 img" style='background-image: url("http://127.0.0.1:3000/uploads/${ele.image_name === null ? 'defaultblog.jpg': ele.image_name}")'>
+	  <a href="blog-single.html?id=${ele?.id}" class="block-20 img" style='background-image: url("http://165.22.210.84/node/uploads/${ele.image_name === null ? 'defaultblog.jpg': ele.image_name}")'>
 	  </a>
 	<h3 class="heading"><a href="blog-single.html">${ele?.summary}</a></h3>
 	<div class="meta mb-3">
@@ -730,7 +730,7 @@ duration: 5000
 						<a href="properties-single.html?id=${item?.project_id}">
 						<div class="project_slider_image">
 							
-							<img src="http://127.0.0.1:3000/uploads/${item.projectimage}" alt="">
+							<img src="http://165.22.210.84/node/uploads/${item.projectimage}" alt="">
 					
 						</div>
 						<h4 id="pName">${item?.projectName}</h4>

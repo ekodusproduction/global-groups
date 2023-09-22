@@ -422,22 +422,22 @@ console.log("ongoingCommercial", ongoingCommercial)
 			response?.data?.result?.amenities?.forEach((amenity)=>{
 				$('.amenities-bottom').append(
 					`<div class="amenity">
-				<img src="http://127.0.0.1:3000/uploads/${amenity?.image}" alt=""/>
+				<img src="http://165.22.210.84/node/uploads/${amenity?.image}" alt=""/>
 				<p>${amenity?.name}</p>
 			</div>`
 				)
 				
 			})
 			$('#projectName').html(`${response?.data?.result?.projectName}`)
-			let imageUrl = `'http://127.0.0.1:3000/uploads/${response?.data?.result?.projectImage}'`;
+			let imageUrl = `'http://165.22.210.84/node/uploads/${response?.data?.result?.projectImage}'`;
 			$('.property-overview-content-img').append(`<img src=${imageUrl} alt="">`)
 			$(".hero-wrap-2").css("background-image", "linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(" + imageUrl + ")");
 			$(".hero-wrap-2").css("background-position", "center")
 			$('.property-highlights-left').append(`
-<img src="http://127.0.0.1:3000/uploads/${response?.data?.result?.projectImage}" alt="">`)
+<img src="http://165.22.210.84/node/uploads/${response?.data?.result?.projectImage}" alt="">`)
 if(response?.data?.result?.projectPdf !== null){
 	$('.property-overview-content-desc').append(`<p>${response?.data?.result?.description}</p>
-			<button class='btn btn-primary'><a onclick='window.open("http://127.0.0.1:3000/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>`)
+			<button class='btn btn-primary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>`)
 }else{
 	$('.property-overview-content-desc').append(`<p>${response?.data?.result?.description}</p>`)
 }
@@ -456,7 +456,7 @@ if(response?.data?.result?.projectPdf !== null){
 			$('#city').html(`${response?.data?.result?.city}`)
 			$('#pincode').html(`${response?.data?.result?.pinCode}`)
 			if(response?.data?.result?.architectureMap !== null){
-				$('.floorplan').append(`<img src="http://127.0.0.1:3000/uploads/${response?.data?.result?.architectureMap}" alt="">`)
+				$('.floorplan').append(`<img src="http://165.22.210.84/node/uploads/${response?.data?.result?.architectureMap}" alt="">`)
 			}else{
 				$('.floorplan').css('display', 'none')
 				
@@ -498,8 +498,8 @@ if(response?.data?.result?.projectPdf !== null){
 		  if(response?.data?.result?.length > 0){
 			response.data?.result?.forEach(function(item) {
 			  console.log("Item", item)
-			  $('.gallery-container').append(`<a class="gallery-img-link" href="http://127.0.0.1:3000/uploads/${item.image_name}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
-			<img class="gallery-image" src="http://127.0.0.1:3000/uploads/${item.image_name}" alt="Golden Gate Bridge with San Francisco in distance">
+			  $('.gallery-container').append(`<a class="gallery-img-link" href="http://165.22.210.84/node/uploads/${item.image_name}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
+			<img class="gallery-image" src="http://165.22.210.84/node/uploads/${item.image_name}" alt="Golden Gate Bridge with San Francisco in distance">
 		  </a>`)
 			});
 		  }else{
