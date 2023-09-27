@@ -259,7 +259,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
 
 
 
-    <section class="ftco-section ftco-no-pt" style="margin-top: 5rem;">
+    <section class="ftco-section ftco-no-pt" style="margin-top: 5rem;" id="blogSection">
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 heading-section text-center ftco-animate">
@@ -545,7 +545,8 @@ headers: {
     'Content-Type': 'application/json'
   },
 success: function(response) {
-response.data?.map((ele)=>{
+	if(response?.data?.length > 0){
+		response.data?.map((ele)=>{
 $('#blogContainer').append(` <div class="col-md-3 d-flex">
   <div class="blog-entry justify-content-end">
   <div class="text">
@@ -561,6 +562,10 @@ $('#blogContainer').append(` <div class="col-md-3 d-flex">
 </div>
 </div>`)
 })
+	}else{
+		$('#blogSection').css('display', 'none');
+	}
+
 
 },
 error: function(xhr, status, error) {
