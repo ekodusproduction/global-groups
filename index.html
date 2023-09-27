@@ -605,63 +605,6 @@ duration: 5000
 </script>
     <script>
 		
-	$.ajax({
-		url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
-		method: "GET",
-		dataType: "json",
-		headers: {
-    'apptoken': 'eyJhbGciOiJIUzM4NCJ9.eyJJc3N1ZXIiOiJQU1NTIiwiQXBwbGljYXRpb24iOiJJUEwtTUFSS0VULVBMQUNFIiwiaWF0IjoxNjQ4NTU2MzY0fQ.sglGgNFW6XwLJ71Bz8MpDcxgX62p2eYjGJ_0vonaoQK06_SDWy92fsonk5tG2XAz',
-    'Content-Type': 'application/json'
-  },
-		success: function(response) {
-		response.data?.result?.map(function(item, index) {
-			$('#project_container').append(`
-			<li class="splide__slide">
-				
-					<div class="project_slider_item">
-						<a href="properties-single.html?id=${item?.project_id}">
-						<div class="project_slider_image">
-							
-							<img src="http://165.22.210.84/node/uploads/${item.projectimage}" alt="">
-					
-						</div>
-						<h4 id="pName">${item?.projectName}</h4>
-					</a>
-					</div>
-			
-				  </li>
- 
- 
-  `)	
-			});
-
-
-
-			var splide = new Splide( '.splide', {
-  type   : 'loop',
-  perPage: 4,
-  perMove: 1,
-  autoplay: true,
-  breakpoints: {
-		1200: {
-			perPage: 3,
-		},
-		992: {
-			perPage: 2
-		},
-		756: {
-			perPage: 1
-		}
-  }
-} );
-
-splide.mount();
-
-		},
-		error: function(xhr, status, error) {
-			console.error("Error:", error);
-		}
-	});
 
   
 	
