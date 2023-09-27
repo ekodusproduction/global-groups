@@ -452,6 +452,18 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
   <script src="js/main.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script>
+	var splide = new Splide( '#second-slider', {
+  type   : 'loop',
+  perPage: 3,
+  perMove: 1,
+  autoplay: true,
+  breakpoints: {
+		756: {
+			perPage: 1
+		}
+  }
+} );
+splide.mount();
 	// Make an AJAX request to fetch data
 	$.ajax({
 url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
@@ -596,18 +608,7 @@ $('#testimonialContainer').append(`<li class="splide__slide me-3 d-flex justify-
   </div>
 	</li>`)
 })
-var splide = new Splide( '#second-slider', {
-  type   : 'loop',
-  perPage: 3,
-  perMove: 1,
-  autoplay: true,
-  breakpoints: {
-		756: {
-			perPage: 1
-		}
-  }
-} );
-splide.mount();
+
 }else{
 	$('#testimonialContainer').append(`<p>No testimony</p>`)
 }
