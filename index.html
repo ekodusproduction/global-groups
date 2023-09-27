@@ -698,7 +698,7 @@ var splide = new Splide( '#second-slider', {
 } );
 splide.mount();
 }else{
-	$('.testimony-section').css('visibility', 'hidden')
+	$('#testimonialContainer').append(`<p>No testimony</p>`)
 }
 },
 error: function(xhr, status, error) {
