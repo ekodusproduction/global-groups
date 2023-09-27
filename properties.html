@@ -325,9 +325,9 @@
 			  <div class="ftco-footer-widget mb-4 ml-md-4">
 				<h2 class="ftco-heading-2">Quick Links</h2>
 				<ul class="list-unstyled">
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>About us</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Ongoing Projects</a></li>
+				  <li><a href="index.html"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+				  <li><a href="about.html"><span class="icon-long-arrow-right mr-2"></span>About us</a></li>
+				  <li><a href="properties.html"><span class="icon-long-arrow-right mr-2"></span>Resedential Projects</a></li>
 				</ul>
 			  </div>
 			</div>
@@ -335,10 +335,10 @@
 			   <div class="ftco-footer-widget mb-4">
 				<h2 class="ftco-heading-2">Quick Links</h2>
 				<ul class="list-unstyled">
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Completed Projects</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Registration</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Blogs</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+				  <li><a href="commercial.html"><span class="icon-long-arrow-right mr-2"></span>Commercial Projects</a></li>
+				  <li><a href="registration.html"><span class="icon-long-arrow-right mr-2"></span>Registration</a></li>
+				  <li><a href="blog.html"><span class="icon-long-arrow-right mr-2"></span>Blogs</a></li>
+				  <li><a href="contact.html"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
 				</ul>
 			  </div>
 			</div>
@@ -398,7 +398,6 @@
     'Content-Type': 'application/json'
   },
 		success: function(response) {
-		  console.log("reponse",  response.data?.result)
 		const ongoingResedential = response?.data?.result?.filter((ele)=>{
 				if(ele?.status == "ongoing" && ele?.type == "residential")
 				return ele; 
@@ -407,9 +406,6 @@
 				if(ele?.status == "completed" && ele?.type == "residential")
 				return ele
 		}) 
-		console.log("completedResedential", completedResedential)
-
-		
 		ongoingResedential && ongoingResedential?.map((ele)=>{
 			$('#resUnderConstruction').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>`)
 		})
@@ -421,17 +417,10 @@
   if(ele?.status == "completed" && ele?.type == "commercial")
   return ele
 }) 
-console.log("ongoingCommercial", ongoingCommercial)
 		ongoingCommercial && ongoingCommercial?.map((ele)=>{
 			$('#ongoingCommercial').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>
 			`)
 		})
-
-		
-									
-
-		
-		console.log("Dinesh", ongoingResedential, completedResedential)
 		},
 		error: function(xhr, status, error) {
 			console.error("Error:", error);
@@ -448,9 +437,7 @@ console.log("ongoingCommercial", ongoingCommercial)
     'Content-Type': 'application/json'
   },
 		success: function(response) {
-		  console.log("Resedential Response",  response.data?.result)
 			response.data?.result?.forEach(function(item) {
-			  console.log("Item", item)
 			  $('#card-container').append(`<div class='col-md-4'>
 			  <div class='property-wrap '>
 			  <div class='img d-flex align-items-center justify-content-center' data-datac={${item?.project_id}} style='background-image: url("http://165.22.210.84/node/uploads/${item.projectimage}")' >

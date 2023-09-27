@@ -252,7 +252,7 @@
 	</section>
 		
 
-    <footer class="ftco-footer ftco-section">
+	<footer class="ftco-footer ftco-section">
 		<div class="container">
 		  <div class="row mb-5">
 			<div class="col-md">
@@ -281,9 +281,9 @@
 			  <div class="ftco-footer-widget mb-4 ml-md-4">
 				<h2 class="ftco-heading-2">Quick Links</h2>
 				<ul class="list-unstyled">
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>About us</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Ongoing Projects</a></li>
+				  <li><a href="index.html"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+				  <li><a href="about.html"><span class="icon-long-arrow-right mr-2"></span>About us</a></li>
+				  <li><a href="properties.html"><span class="icon-long-arrow-right mr-2"></span>Resedential Projects</a></li>
 				</ul>
 			  </div>
 			</div>
@@ -291,16 +291,16 @@
 			   <div class="ftco-footer-widget mb-4">
 				<h2 class="ftco-heading-2">Quick Links</h2>
 				<ul class="list-unstyled">
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Completed Projects</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Registration</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Blogs</a></li>
-				  <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+				  <li><a href="commercial.html"><span class="icon-long-arrow-right mr-2"></span>Commercial Projects</a></li>
+				  <li><a href="registration.html"><span class="icon-long-arrow-right mr-2"></span>Registration</a></li>
+				  <li><a href="blog.html"><span class="icon-long-arrow-right mr-2"></span>Blogs</a></li>
+				  <li><a href="contact.html"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
 				</ul>
 			  </div>
 			</div>
 			<div class="col-md">
 			  <div class="ftco-footer-widget mb-4">
-				  <h2 class="ftco-heading-2">Have a Question?</h2>
+				  <h2 class="ftco-heading-2">Have a Questions?</h2>
 				  <div class="block-23 mb-3">
 					<ul>
 					  <li><span class="icon icon-map-marker"></span><span class="text">1st Floor, Lotus Apartment Pankaj Nagar, Bhetapara Rd, Borsojai, Guwahati, Assam 781029</span></li>
@@ -321,7 +321,6 @@
 		  </div>
 		</div>
 	  </footer>
-
     
   
 	
@@ -348,7 +347,44 @@
 })
   </script>
 
-  
+<script>
+	$( document ).ready(function() {
+		const searchParams = new URLSearchParams(window.location.search);
+	console.log("serachParms", searchParams)
+	console.log(searchParams.get('id'))
+
+	const id = searchParams.get('id')
+    console.log( "ready!" );
+	$.ajax({
+		url: `http://165.22.210.84/node/v1/api/gallery/getGalleryList/${id}`, // Replace with your server-side script
+		method: "GET",
+		dataType: "json",
+		headers: {
+    'apptoken': 'eyJhbGciOiJIUzM4NCJ9.eyJJc3N1ZXIiOiJQU1NTIiwiQXBwbGljYXRpb24iOiJJUEwtTUFSS0VULVBMQUNFIiwiaWF0IjoxNjQ4NTU2MzY0fQ.sglGgNFW6XwLJ71Bz8MpDcxgX62p2eYjGJ_0vonaoQK06_SDWy92fsonk5tG2XAz',
+    'Content-Type': 'application/json'
+  },
+		success: function(response) {
+		  console.log("reponse",  response.data?.result)
+		  if(response?.data?.result?.length > 0){
+			response.data?.result?.forEach(function(item) {
+			  console.log("Item", item)
+			  $('.gallery-container').append(`<a class="gallery-img-link" href="http://165.22.210.84/node/uploads/${item.image_name}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
+			<img class="gallery-image" src="http://165.22.210.84/node/uploads/${item.image_name}" alt="Golden Gate Bridge with San Francisco in distance">
+		  </a>`)
+			});
+		  }else{
+			$('.gallery-container').append("<p>No Gallery as of Now</p>")
+			//$('.gallery').css('display', 'none')
+		  }
+			
+		},
+		error: function(xhr, status, error) {
+			console.error("Error:", error);
+		}
+	});
+});
+	
+  </script>
  
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js" integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
   <script>
@@ -358,7 +394,6 @@
 
 	const id = searchParams.get('id')
 	
-	$(document).ready(function() {
 
 
 		// Make an AJAX request to fetch data
@@ -484,38 +519,17 @@ if(response?.data?.result?.projectPdf !== null){
 			console.error("Error:", error);
 		}
 	});
+	
+
+
+
 	// Make an AJAX request to fetch data
-	$.ajax({
-		url: `http://165.22.210.84/node/v1/api/gallery/getGalleryList/${id}`, // Replace with your server-side script
-		method: "GET",
-		dataType: "json",
-		headers: {
-    'apptoken': 'eyJhbGciOiJIUzM4NCJ9.eyJJc3N1ZXIiOiJQU1NTIiwiQXBwbGljYXRpb24iOiJJUEwtTUFSS0VULVBMQUNFIiwiaWF0IjoxNjQ4NTU2MzY0fQ.sglGgNFW6XwLJ71Bz8MpDcxgX62p2eYjGJ_0vonaoQK06_SDWy92fsonk5tG2XAz',
-    'Content-Type': 'application/json'
-  },
-		success: function(response) {
-		  console.log("reponse",  response.data?.result)
-		  if(response?.data?.result?.length > 0){
-			response.data?.result?.forEach(function(item) {
-			  console.log("Item", item)
-			  $('.gallery-container').append(`<a class="gallery-img-link" href="http://165.22.210.84/node/uploads/${item.image_name}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
-			<img class="gallery-image" src="http://165.22.210.84/node/uploads/${item.image_name}" alt="Golden Gate Bridge with San Francisco in distance">
-		  </a>`)
-			});
-		  }else{
-			$('.gallery').css('display', 'none')
-		  }
-			
-		},
-		error: function(xhr, status, error) {
-			console.error("Error:", error);
-		}
-	});
-});
+
 
 
   
   </script>
+ 
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
