@@ -406,7 +406,6 @@
     'Content-Type': 'application/json'
   },
 		success: function(response) {
-		  console.log("reponse",  response.data?.result)
 		const ongoingResedential = response?.data?.result?.filter((ele)=>{
 				if(ele?.status == "ongoing"  && ele?.type == "residential")
 				return ele; 
@@ -428,16 +427,11 @@
   if(ele?.status == "completed" && ele?.type == "commercial")
   return ele
 }) 
-console.log("ongoingCommercial", ongoingCommercial)
 		ongoingCommercial && ongoingCommercial?.map((ele)=>{
 			$('#ongoingCommercial').append(`
 			<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>
 			`)
 		})
-							
-
-		
-		console.log("Dinesh", ongoingResedential, completedResedential)
 		},
 		error: function(xhr, status, error) {
 			console.error("Error:", error);
@@ -463,6 +457,7 @@ console.log("ongoingCommercial", ongoingCommercial)
 				)
 				
 			})
+			document.title = `${response?.data?.result?.projectName} - Global Groups`;
 			$('#projectName').html(`${response?.data?.result?.projectName}`)
 			let imageUrl = `'http://165.22.210.84/node/uploads/${response?.data?.result?.projectImage}'`;
 			$('.property-overview-content-img').append(`<img src=${imageUrl} alt="">`)
