@@ -447,7 +447,6 @@
     'Content-Type': 'application/json'
   },
 		success: function(response) {
-		  console.log("Amenityreponse",  response.data?.result)
 			response?.data?.result?.amenities?.forEach((amenity)=>{
 				$('.amenities-bottom').append(
 					`<div class="amenity">
@@ -465,10 +464,17 @@
 			$(".hero-wrap-2").css("background-position", "center")
 			$('.property-highlights-left').append(`
 <img src="http://165.22.210.84/node/uploads/${response?.data?.result?.projectImage}" alt="">`)
-if(response?.data?.result?.projectPdf !== null){
+if(response?.data?.result?.projectPdf !== null && response?.data?.result?.architectureMap === null){
 	$('.property-overview-content-desc').append(`<p>${response?.data?.result?.description}</p>
-			<button class='btn btn-primary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>`)
-}else{
+			<button class='btn btn-primary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>
+	`)
+}else if(response?.data?.result?.projectPdf !== null && response?.data?.result?.architectureMap !== null){
+	$('.property-overview-content-desc').append(`<p>${response?.data?.result?.description}</p>
+			<button class='btn btn-primary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>
+			<button class='btn btn-secondary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.architectureMap}","_blank")'>Download Floor Plan</a></button>`)
+}
+
+else{
 	$('.property-overview-content-desc').append(`<p>${response?.data?.result?.description}</p>`)
 }
 			
