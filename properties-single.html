@@ -350,11 +350,7 @@
 <script>
 	$( document ).ready(function() {
 		const searchParams = new URLSearchParams(window.location.search);
-	console.log("serachParms", searchParams)
-	console.log(searchParams.get('id'))
-
 	const id = searchParams.get('id')
-    console.log( "ready!" );
 	$.ajax({
 		url: `http://165.22.210.84/node/v1/api/gallery/getGalleryList/${id}`, // Replace with your server-side script
 		method: "GET",
@@ -364,17 +360,16 @@
     'Content-Type': 'application/json'
   },
 		success: function(response) {
-		  console.log("reponse",  response.data?.result)
 		  if(response?.data?.result?.length > 0){
 			response.data?.result?.forEach(function(item) {
-			  console.log("Item", item)
+			 
 			  $('.gallery-container').append(`<a class="gallery-img-link" href="http://165.22.210.84/node/uploads/${item.image_name}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
 			<img class="gallery-image" src="http://165.22.210.84/node/uploads/${item.image_name}" alt="Golden Gate Bridge with San Francisco in distance">
 		  </a>`)
 			});
 		  }else{
-			$('.gallery-container').append("<p>No Gallery as of Now</p>")
-			//$('.gallery').css('display', 'none')
+			//$('.gallery-container').append("<p>No Gallery as of Now</p>")
+			$('.gallery').css('display', 'none')
 		  }
 			
 		},
@@ -393,9 +388,6 @@
 	console.log(searchParams.get('id'))
 
 	const id = searchParams.get('id')
-	
-
-
 		// Make an AJAX request to fetch data
 	$.ajax({
 		url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
@@ -499,7 +491,6 @@ else{
 			}
 		
 			response?.data?.result?.highlights?.forEach((highlight, index)=>{
-				console.log("index", index)
 				if(index > 1){
 					$('#highlight2').append(
 					`<div class="property-highlights-item">

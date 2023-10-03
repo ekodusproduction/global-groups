@@ -309,9 +309,6 @@
 	
 	  $(document).ready(function() {
 		document.title = `Commercial - Global Groups`;
-	  // Make an AJAX request to fetch data
-
-	  // Make an AJAX request to fetch data
 $.ajax({
 url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 method: "GET",
@@ -321,7 +318,6 @@ headers: {
     'Content-Type': 'application/json'
   },
 success: function(response) {
-console.log("reponse",  response.data?.result)
 const ongoingResedential = response?.data?.result?.filter((ele)=>{
 	if(ele?.status == "ongoing" && ele?.type == "residential")
 	return ele; 
@@ -330,9 +326,6 @@ const completedResedential = response?.data?.result?.filter((ele)=>{
 	if(ele?.status == "completed" && ele?.type == "residential")
 	return ele
 }) 
-console.log("completedResedential", completedResedential)
-
-
 ongoingResedential && ongoingResedential?.map((ele)=>{
 $('#resUnderConstruction').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>`)
 })
@@ -344,17 +337,11 @@ const ongoingCommercial = response?.data?.result?.filter((ele)=>{
 if(ele?.status == "completed" && ele?.type == "commercial")
 return ele
 }) 
-console.log("ongoingCommercial", ongoingCommercial)
 ongoingCommercial && ongoingCommercial?.map((ele)=>{
 $('#ongoingCommercial').append(`<li><a href="properties-single.html?id=${ele?.project_id}">${ele?.projectName}</a></li>
 `)
 })
 
-
-						
-
-
-console.log("Dinesh", ongoingResedential, completedResedential)
 },
 error: function(xhr, status, error) {
 console.error("Error:", error);
@@ -369,10 +356,8 @@ console.error("Error:", error);
     'Content-Type': 'application/json'
   },
 		  success: function(response) {
-			console.log("reponse",  response.data?.result)
 			if(response?.data?.result?.length > 0){
 				response.data?.result?.forEach(function(item) {
-				console.log("Item", item)
 				$('#card-container').append(`<div class='col-md-4'>
 				<div class='property-wrap '>
 				<div class='img d-flex align-items-center justify-content-center' data-datac={${item?.project_id}} style='background-image: url("http://165.22.210.84/node/uploads/${item.projectimage}")' onclick="handleProjectItem(${item?.id})">

@@ -293,40 +293,36 @@ document.title = `Contact - Global Groups`;
     form.addEventListener("submit", function(event) {
         event.preventDefault(); 
         const formData = new FormData(form);
-        console.log("message", formData.get("message"))
         const data = {
           name: formData.get("name"),
           email: formData.get("email"),
           phoneNumber: formData.get("phoneNumber"),
           message: formData.get("message"),
-         
         }
-        console.log("data", data)
         $.ajax({
           url: "http://165.22.210.84/node/v1/api/contact/addContact", 
           method: "POST",
           data: data,
-       
           success: function(response) {
         if(response?.status === 200){
           form.reset();
               Toastify({
-        text: response?.data?.message,
-        gravity: "bottom",
-        position: "right",
-        style: {
-          background: "#008000",
-          },
-        duration: 5000
+              text: response?.data?.message,
+                gravity: "bottom",
+               position: "right",
+              style: {
+                 background: "#008000",
+                },
+              duration: 5000
 
         }).showToast();
             }else{
           
 
               Toastify({
-text: response?.data?.message,
+              text: response?.data?.message,
 
-gravity: "bottom",
+            gravity: "bottom",
 position: "right",
 style: {
     background: "#FF0000",
@@ -335,7 +331,7 @@ duration: 5000
 
 }).showToast();
             }
-            console.log("reponse",  response)
+           
            
           },
           error: function(error, message
@@ -366,11 +362,8 @@ duration: 5000
     'Content-Type': 'application/json'
   },
           success: function(response) {
-            console.log("reponse",  response.data?.result)
               const dropdown = $("#dropdown");
               dropdown.find("option:not(:first-child)").remove();
-  
-              // Populate the dropdown with received data
               response.data?.result?.forEach(function(item) {
                   dropdown.append(new Option(item.projectName, item.projectId));
               });
