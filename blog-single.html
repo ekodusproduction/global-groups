@@ -257,7 +257,7 @@ $(document).ready(function() {
   const searchParams = new URLSearchParams(window.location.search);
   const id = searchParams.get('id')
 $.ajax({
-		url: `http://165.22.210.84/node/v1/api/blog/getBlogPostById/${id}`, 
+		url: `http://globalgroupne.com/node/v1/api/blog/getBlogPostById/${id}`, 
 		method: "GET",
 		dataType: "json",
     headers: {
@@ -269,7 +269,7 @@ $.ajax({
       $('#blogTitle').html(`${ response.data?.result[0]?.title}`)
       $('#created_at').html(`${moment(response.data?.result[0]?.created_at).format('ll')}`)
       if(response?.data?.result[0]?.blogImage != null){
-        $('#blogImage').append(`<img class='img-fluid' src="http://165.22.210.84/node/uploads/${response?.data?.result[0]?.blogImage}" alt="" />`)
+        $('#blogImage').append(`<img class='img-fluid' src="http://globalgroupne.com/node/uploads/${response?.data?.result[0]?.blogImage}" alt="" />`)
       }
       const parser = new DOMParser();
 const description = parser.parseFromString(response.data?.result[0]?.description.replace(/^"|"$/g, ''), 'text/html');
@@ -287,7 +287,7 @@ $('.blogContent').append(eleement)
 })
     // Make an AJAX request to fetch data
 $.ajax({
-url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 method: "GET",
 dataType: "json",
 headers: {

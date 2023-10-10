@@ -451,7 +451,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
 	  document.title = `Home - Global Groups`;
 	// Make an AJAX request to fetch data
 	$.ajax({
-url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 method: "GET",
 dataType: "json",
 headers: {
@@ -467,7 +467,7 @@ success: function(response) {
 						<a href="properties-single.html?id=${item?.project_id}">
 						<div class="project_slider_image">
 							
-							<img src="http://165.22.210.84/node/uploads/${item.projectimage}" alt="">
+							<img src="http://globalgroupne.com/node/uploads/${item.projectimage}" alt="">
 					
 						</div>
 						<h4 id="pName">${item?.projectName}</h4>
@@ -536,7 +536,7 @@ console.error("Error:", error);
 
 
 $.ajax({
-url: "http://165.22.210.84/node/v1/api/blog/getBlogPostList", // Replace with your server-side script
+url: "http://globalgroupne.com/node/v1/api/blog/getBlogPostList", // Replace with your server-side script
 method: "GET",
 dataType: "json",
 headers: {
@@ -549,7 +549,7 @@ success: function(response) {
 $('#blogContainer').append(` <div class="col-md-3 d-flex">
   <div class="blog-entry justify-content-end">
   <div class="text">
-	  <a href="blog-single.html?id=${ele?.id}" class="block-20 img" style='background-image: url("http://165.22.210.84/node/uploads/${ele.image_name === null ? 'defaultblog.jpg': ele.image_name}")'>
+	  <a href="blog-single.html?id=${ele?.id}" class="block-20 img" style='background-image: url("http://globalgroupne.com/node/uploads/${ele.image_name === null ? 'defaultblog.jpg': ele.image_name}")'>
 	  </a>
 	<h3 class="heading"><a href="blog-single.html">${ele?.summary}</a></h3>
 	<div class="meta mb-3">
@@ -588,7 +588,7 @@ phoneNumber: formData.get("phoneNumber"),
 message: formData.get("message"),
 }
 $.ajax({
-url: "http://165.22.210.84/node/v1/api/contact/addContact", 
+url: "http://globalgroupne.com/node/v1/api/contact/addContact", 
 method: "POST",
 
 data: data,
@@ -643,7 +643,7 @@ duration: 5000
 
 
 $.ajax({
-url: "http://165.22.210.84/node/v1/api/testimony/getTestimonyList", // Replace with your server-side script
+url: "http://globalgroupne.com/node/v1/api/testimony/getTestimonyList", // Replace with your server-side script
 method: "GET",
 dataType: "json",
 headers: {
@@ -655,7 +655,7 @@ if(response?.data?.result?.length > 0){
 	response.data?.result?.map((ele)=>{
 $('#testimonialContainer').append(`<li class="splide__slide me-3 d-flex justify-content-center">
 	<div class="testimonial-card">
-    <img src="http://165.22.210.84/node/uploads/${ele?.image != null ? ele?.image :"avatar.jpg" }" alt="Testimonial Author" class="testimonial-image">
+    <img src="http://globalgroupne.com/node/uploads/${ele?.image != null ? ele?.image :"avatar.jpg" }" alt="Testimonial Author" class="testimonial-image">
     <p class="testimonial-text">${ele?.review}</p>
     <p class="testimonial-author">${ele?.name}</p>
   </div>

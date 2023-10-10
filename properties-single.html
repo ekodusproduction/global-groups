@@ -352,7 +352,7 @@
 		const searchParams = new URLSearchParams(window.location.search);
 	const id = searchParams.get('id')
 	$.ajax({
-		url: `http://165.22.210.84/node/v1/api/gallery/getGalleryList/${id}`, // Replace with your server-side script
+		url: `http://globalgroupne.com/node/v1/api/gallery/getGalleryList/${id}`, // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
 		headers: {
@@ -363,8 +363,8 @@
 		  if(response?.data?.result?.length > 0){
 			response.data?.result?.forEach(function(item) {
 			 
-			  $('.gallery-container').append(`<a class="gallery-img-link" href="http://165.22.210.84/node/uploads/${item.image_name}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
-			<img class="gallery-image" src="http://165.22.210.84/node/uploads/${item.image_name}" alt="Golden Gate Bridge with San Francisco in distance">
+			  $('.gallery-container').append(`<a class="gallery-img-link" href="http://globalgroupne.com/node/uploads/${item.image_name}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
+			<img class="gallery-image" src="http://globalgroupne.com/node/uploads/${item.image_name}" alt="Golden Gate Bridge with San Francisco in distance">
 		  </a>`)
 			});
 		  }else{
@@ -390,7 +390,7 @@
 	const id = searchParams.get('id')
 		// Make an AJAX request to fetch data
 	$.ajax({
-		url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+		url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
 		headers: {
@@ -431,7 +431,7 @@
 	});
 
 		$.ajax({
-		url: `http://165.22.210.84/node/v1/api/project/getProjectById/${id}`, // Replace with your server-side script
+		url: `http://globalgroupne.com/node/v1/api/project/getProjectById/${id}`, // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
 		headers: {
@@ -442,7 +442,7 @@
 			response?.data?.result?.amenities?.forEach((amenity)=>{
 				$('.amenities-bottom').append(
 					`<div class="amenity">
-				<img src="http://165.22.210.84/node/uploads/${amenity?.image}" alt=""/>
+				<img src="http://globalgroupne.com/node/uploads/${amenity?.image}" alt=""/>
 				<p>${amenity?.name}</p>
 			</div>`
 				)
@@ -450,20 +450,20 @@
 			})
 			document.title = `${response?.data?.result?.projectName} - Global Groups`;
 			$('#projectName').html(`${response?.data?.result?.projectName}`)
-			let imageUrl = `'http://165.22.210.84/node/uploads/${response?.data?.result?.projectImage}'`;
+			let imageUrl = `'http://globalgroupne.com/node/uploads/${response?.data?.result?.projectImage}'`;
 			$('.property-overview-content-img').append(`<img src=${imageUrl} alt="">`)
 			$(".hero-wrap-2").css("background-image", "linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(" + imageUrl + ")");
 			$(".hero-wrap-2").css("background-position", "center")
 			$('.property-highlights-left').append(`
-<img src="http://165.22.210.84/node/uploads/${response?.data?.result?.projectImage}" alt="">`)
+<img src="http://globalgroupne.com/node/uploads/${response?.data?.result?.projectImage}" alt="">`)
 if(response?.data?.result?.projectPdf !== null && response?.data?.result?.architectureMap === null){
 	$('.property-overview-content-desc').append(`<p>${response?.data?.result?.description}</p>
-			<button class='btn btn-primary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>
+			<button class='btn btn-primary'><a onclick='window.open("http://globalgroupne.com/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>
 	`)
 }else if(response?.data?.result?.projectPdf !== null && response?.data?.result?.architectureMap !== null){
 	$('.property-overview-content-desc').append(`<p>${response?.data?.result?.description}</p>
-			<button class='btn btn-primary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>
-			<button class='btn btn-secondary'><a onclick='window.open("http://165.22.210.84/node/uploads/${response?.data?.result?.architectureMap}","_blank")'>Download Floor Plan</a></button>`)
+			<button class='btn btn-primary'><a onclick='window.open("http://globalgroupne.com/node/uploads/${response?.data?.result?.projectPdf}","_blank")'>Download Brochure</a></button>
+			<button class='btn btn-secondary'><a onclick='window.open("http://globalgroupne.com/node/uploads/${response?.data?.result?.architectureMap}","_blank")'>Download Floor Plan</a></button>`)
 }
 
 else{
@@ -484,7 +484,7 @@ else{
 			$('#city').html(`${response?.data?.result?.city}`)
 			$('#pincode').html(`${response?.data?.result?.pinCode}`)
 			if(response?.data?.result?.architectureMap !== null){
-				$('.floorplan').append(`<img src="http://165.22.210.84/node/uploads/${response?.data?.result?.architectureMap}" alt="">`)
+				$('.floorplan').append(`<img src="http://globalgroupne.com/node/uploads/${response?.data?.result?.architectureMap}" alt="">`)
 			}else{
 				$('.floorplan').css('display', 'none')
 				

@@ -310,7 +310,7 @@
 	  $(document).ready(function() {
 		document.title = `Commercial - Global Groups`;
 $.ajax({
-url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 method: "GET",
 dataType: "json",
 headers: {
@@ -348,7 +348,7 @@ console.error("Error:", error);
 }
 });
 	  $.ajax({
-		  url: "http://165.22.210.84/node/v1/api/project/commercial", // Replace with your server-side script
+		  url: "http://globalgroupne.com/node/v1/api/project/commercial", // Replace with your server-side script
 		  method: "GET",
 		  dataType: "json",
 		  headers: {
@@ -360,7 +360,7 @@ console.error("Error:", error);
 				response.data?.result?.forEach(function(item) {
 				$('#card-container').append(`<div class='col-md-4'>
 				<div class='property-wrap '>
-				<div class='img d-flex align-items-center justify-content-center' data-datac={${item?.project_id}} style='background-image: url("http://165.22.210.84/node/uploads/${item.projectimage}")' onclick="handleProjectItem(${item?.id})">
+				<div class='img d-flex align-items-center justify-content-center' data-datac={${item?.project_id}} style='background-image: url("http://globalgroupne.com/node/uploads/${item.projectimage}")' onclick="handleProjectItem(${item?.id})">
 				<a href='properties-single.html?id=${item?.project_id}' class='icon d-flex align-items-center justify-content-center btn-custom'>
 					<span class='ion-ios-link'></span>
 					</a>

@@ -249,7 +249,7 @@
 document.title = `Contact - Global Groups`;
     			// Make an AJAX request to fetch data
 	$.ajax({
-		url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+		url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
     headers: {
@@ -300,7 +300,7 @@ document.title = `Contact - Global Groups`;
           message: formData.get("message"),
         }
         $.ajax({
-          url: "http://165.22.210.84/node/v1/api/contact/addContact", 
+          url: "http://globalgroupne.com/node/v1/api/contact/addContact", 
           method: "POST",
           data: data,
           success: function(response) {
@@ -354,7 +354,7 @@ duration: 5000
       $(document).ready(function() {
       // Make an AJAX request to fetch data
       $.ajax({
-          url: "http://165.22.210.84/node/v1/api/project/getAllProjectDropDownList", // Replace with your server-side script
+          url: "http://globalgroupne.com/node/v1/api/project/getAllProjectDropDownList", // Replace with your server-side script
           method: "GET",
           dataType: "json",
           headers: {

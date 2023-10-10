@@ -199,7 +199,7 @@
     document.title = `Blog - Global Groups`;
     $(document).ready(function() {
       $.ajax({
-		url: "http://165.22.210.84/node/v1/api/blog/getBlogPostList", // Replace with your server-side script
+		url: "http://globalgroupne.com/node/v1/api/blog/getBlogPostList", // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
     headers: {
@@ -212,7 +212,7 @@
 			$('#blogContainer').append(` <div class="col-md-3 d-flex">
           	<div class="blog-entry justify-content-end">
               <div class="text">
-              	<a href="blog-single.html?id=${ele?.id}" class="block-20 img" style='background-image: url("http://165.22.210.84/node/uploads/${ele.image_name === null ? 'defaultblog.jpg': ele.image_name}")'>
+              	<a href="blog-single.html?id=${ele?.id}" class="block-20 img" style='background-image: url("http://globalgroupne.com/node/uploads/${ele.image_name === null ? 'defaultblog.jpg': ele.image_name}")'>
 	              </a>
                 <h3 class="heading"><a href="blog-single.html">${ele?.summary}</a></h3>
                 <div class="meta mb-3">
@@ -239,7 +239,7 @@
     })
         			// Make an AJAX request to fetch data
 	$.ajax({
-		url: "http://165.22.210.84/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+		url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
     headers: {
