@@ -352,7 +352,7 @@
 		const searchParams = new URLSearchParams(window.location.search);
 	const id = searchParams.get('id')
 	$.ajax({
-		url: `http://globalgroupne.com/node/v1/api/gallery/getGalleryList/${id}`, // Replace with your server-side script
+		url: `https://globalgroupne.com/node/v1/api/gallery/getGalleryList/${id}`, // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
 		headers: {
@@ -390,7 +390,7 @@
 	const id = searchParams.get('id')
 		// Make an AJAX request to fetch data
 	$.ajax({
-		url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+		url: "https://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
 		headers: {
@@ -431,7 +431,7 @@
 	});
 
 		$.ajax({
-		url: `http://globalgroupne.com/node/v1/api/project/getProjectById/${id}`, // Replace with your server-side script
+		url: `https://globalgroupne.com/node/v1/api/project/getProjectById/${id}`, // Replace with your server-side script
 		method: "GET",
 		dataType: "json",
 		headers: {

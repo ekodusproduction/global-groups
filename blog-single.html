@@ -257,7 +257,7 @@ $(document).ready(function() {
   const searchParams = new URLSearchParams(window.location.search);
   const id = searchParams.get('id')
 $.ajax({
-		url: `http://globalgroupne.com/node/v1/api/blog/getBlogPostById/${id}`, 
+		url: `https://globalgroupne.com/node/v1/api/blog/getBlogPostById/${id}`, 
 		method: "GET",
 		dataType: "json",
     headers: {
@@ -287,7 +287,7 @@ $('.blogContent').append(eleement)
 })
     // Make an AJAX request to fetch data
 $.ajax({
-url: "http://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
+url: "https://globalgroupne.com/node/v1/api/project/getAllProject?isactive=1", // Replace with your server-side script
 method: "GET",
 dataType: "json",
 headers: {
