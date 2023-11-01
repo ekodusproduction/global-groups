@@ -8145,7 +8145,7 @@ a {
   color: white; }
   a:hover, a:focus {
     text-decoration: none;
-    color: #df761b;
+    color: white;
     outline: none !important; }
 
 h1, h2, h3, h4, h5,
@@ -9505,6 +9505,13 @@ textarea.form-control {
   gap: 1rem;
   width:50%;
 }
+.home_contact_div form select{
+  width: 100%;
+  padding-inline: 1rem;
+  border: 0.1px solid gray;
+  border-radius: 0px;
+}
+
 .home-about-header{
   background-color: white;
   /* padding: 2rem; */
